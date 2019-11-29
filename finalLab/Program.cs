@@ -2,36 +2,21 @@
 using System.Net;
 using System.IO;
 using System.Text;
-using Nancy.Json;
+using System.Data;
+using System.Data.SqlClient;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
-using System.Data.SqlClient;
-using System.Data;
-using static finalLab.Models;
+//using static finalLab.Apimodel;
 
 namespace finalLab
 {
     class Program
     {
-        static class SqlHelper
-        {
-            public static SqlDataReader ExecuteReader(String connString, String commandText)
-            {
-                SqlConnection conn = new SqlConnection(connString);
-                using (SqlCommand cmd = new SqlCommand(commandText, conn))
-                {
-                    conn.Open();
-                    SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-                    return reader;
-                }
-            }
-        }
 
         static void Main(string[] args)
         {
-
-
-            const string BASE_URL = "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=food-vendors";
+            
+            const string BASE_URL = "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=food-vendors&rows=91";
             string jsonString = CallRestMethod(BASE_URL);
             // Console.WriteLine(jsonString);
             Rootobject rootObject = JsonConvert.DeserializeObject<Rootobject>(jsonString);

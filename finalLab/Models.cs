@@ -1,25 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
-
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace finalLab
 {
-    class Models
+    public class FoodCartContext : DbContext
     {
-        public class FoodCartContext : DbContext
-        {
-            public DbSet<FoodCart> FoodCarts { get; set; }
-            protected override void OnConfiguring(DbContextOptionsBuilder options)
-            {
-                options.UseSqlServer("Data Source=MINGWIN10\\SQLEXPRESS; Database=myDB;Trusted_Connection=True;");
-            }
-        }
-
-        public class FoodCart
+        public DbSet<FoodCart> FoodCarts { get; set; }
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+            => options.UseSqlServer("Server=MINGWIN10\\SQLEXPRESS; Database= myDB;Trusted_Connection=True;");
+    }
+    public class FoodCart 
         {
             [Key]
             public string key { get; set; }
@@ -35,4 +30,4 @@ namespace finalLab
         }
 
     }
-}
+
