@@ -6,21 +6,18 @@ using System.Data;
 using System.Data.SqlClient;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
-//using static finalLab.Apimodel;
+
 
 namespace finalLab
 {
     class Program
     {
-
         static void Main(string[] args)
         {
-            
             const string BASE_URL = "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=food-vendors&rows=91";
             string jsonString = CallRestMethod(BASE_URL);
             // Console.WriteLine(jsonString);
             Rootobject rootObject = JsonConvert.DeserializeObject<Rootobject>(jsonString);
-
             FoodCartContext db = new FoodCartContext();
             foreach (Record cart in rootObject.records)
             {
@@ -35,10 +32,8 @@ namespace finalLab
                     location=cart.fields.location,
                     vendor_type=cart.fields.vendor_type,
                     business_name=cart.fields.business_name
-
                 });
             }
-
             db.SaveChanges();
         }
         static string CallRestMethod(string uri)
@@ -59,6 +54,5 @@ namespace finalLab
                 return $"{{'Error':'{e.Message}'}}";
             }
         }
-
     }
 }

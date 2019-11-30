@@ -30,4 +30,8 @@ namespace finalLab
         }
 
     }
-
+//创建完此models class之后在命令行执行以下三行：
+//Install-Package Microsoft.EntityFrameworkCore.Tools
+//Add-Migration InitialCreate
+//Update-Database
+//有关说明见:https://docs.microsoft.com/en-us/ef/core/get-started/?tabs=visual-studio
